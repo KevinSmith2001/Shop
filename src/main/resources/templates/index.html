@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 新 Bootstrap5 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+
+    <!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<form action="/" method="get">
+    <input type="text" placeholder="请输入商品名称" name="goodsName" />
+    <input type="submit" value="查询" />
+</form>
+<table class="table table-bordered">
+    <tr>
+        <th>商品名称</th>
+        <th>商品描述</th>
+        <th>商品价格</th>
+        <th>商品数量</th>
+        <th>商品产地</th>
+        <th>删除</th>
+    </tr>
+    <tr th:each="shop : ${shops.list}">
+        <td>
+            <th:block th:text="${shop.goodsName}"/>
+        </td>
+        <td >
+            <th:block th:text="${shop.goodsDisc}"/>
+        </td>
+        <td >
+            <th:block th:text="${shop.goodsPrice}"/>
+        </td>
+
+        <td >
+            <th:block th:text="${shop.goodsDiscount}"/>
+        </td>
+        <td >
+            <th:block th:text="${shop.goodsOrigin}"/>
+        </td>
+        <td>
+            <th:block th:text="删除"/>
+        </td>
+    </tr>
+</table>
+<div th:replace="paging :: pageAdminNav(${shops})"></div>
+</body>
+</html>
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace同样指向对应的Mapper接口-->
+<mapper namespace="com.example.shop.mapper.ShopMapper">
+    <!--    resultMap处理字段和属性得映射关系，表名的字段和实体类属性名称不一定一致-->
+    <!--    属性：id：表示自定义映射的唯一标识，不能重复，type：查询的数据要映射的实体类的类型，可以写包的全名-->
+    <resultMap id="resultMapShop" type="Shop">
+        <!--    id：设置主键的映射关系 result：设置普通字段的映射关系-->
+        <!--    property：设置映射关系中实体类中的属性名 column：设置映射关系中表中的字段名-->
+        <id property="goodsId" column="goods_id" />
+        <result property="cateId" column="cate_id"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="goodsDisc" column="goods_disc"/>
+        <result property="goodsPrice" column="goods_price"/>
+        <result property="goodsDiscount" column="goods_discount"/>
+        <result property="goodsStock" column="goods_stock"/>
+        <result property="goodsOrigin" column="goods_origin"/>
+        <result property="goodsMaterial" column="goods_material"/>
+        <result property="goodsPostalfee" column="goods_postalfee"/>
+        <result property="goodsDate" column="goods_date"/>
+        <result property="goodsSales" column="goods_sales"/>
+        <result property="goodsPic" column="goods_pic"/>
+    </resultMap>
+<select id="selectShop" resultMap="resultMapShop">
+    select * from t_goods
+    <where>
+        <if test="goodsName !=null and goodsName !=''">
+            <bind name="goods_name" value="'%'+_parameter.getGoodsName()+'%'"/>
+            and goods_name like #{goods_name}
+        </if>
+    </where>
+</select>
+</mapper>

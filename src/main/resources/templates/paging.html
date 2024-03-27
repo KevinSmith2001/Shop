@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="pageAdminNav(pageInfo)">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:if="${pageInfo.hasPreviousPage}" >
+                <a class="page-link" th:href="@{'?page='+${pageInfo.prePage}}" >上一页</a>
+            </li>
+            <li th:class="${nav==pageInfo.pageNum}?'page-item active':'page-item'" th:each="nav : ${pageInfo.navigatepageNums}">
+                <a class="page-link" th:href="@{'?page='+${nav}}" th:text="${nav}"></a> </li>
+
+            <li class="page-item" th:if="${pageInfo.hasNextPage}">
+                <a class="page-link" th:href="@{'?page='+${pageInfo.nextPage}}">下一页</a>
+            </li>
+
+        </ul>
+    </nav>
+</div>
+</body>
+</html>
