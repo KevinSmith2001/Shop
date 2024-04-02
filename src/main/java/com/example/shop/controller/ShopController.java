@@ -14,13 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ShopController {
     @Autowired
     private ShopService shopService;
+
     @GetMapping("/")
-    public String getArticleList(@RequestParam(value = "page",defaultValue = "1")int page,
-                                 @RequestParam(value = "count",defaultValue = "10")int count,
+    public String getArticleList(@RequestParam(value = "page", defaultValue = "1") int page,
+                                 @RequestParam(value = "count", defaultValue = "10") int count,
                                  Shop shop,
-                                 Model model){
-        PageInfo<Shop> shopPageInfo=shopService.selectShop(page,count,shop);
-        model.addAttribute("shops",shopPageInfo);
+                                 Model model) {
+        PageInfo<Shop> shopPageInfo = shopService.selectShop(page, count, shop);
+        model.addAttribute("shops", shopPageInfo);
+        model.addAttribute("params", shop);
         return "index";
     }
 }
+

@@ -25,7 +25,7 @@
 <select id="selectShop" resultMap="resultMapShop">
     select * from t_goods
     <where>
-        <if test="goodsName !=null and goodsName !=''">
+        <if test="goodsName !=null and goodsName !=''and goodsName !='null'">
             <bind name="goods_name" value="'%'+_parameter.getGoodsName()+'%'"/>
             and goods_name like #{goods_name}
         </if>
